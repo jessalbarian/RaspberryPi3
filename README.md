@@ -15,9 +15,28 @@ $ sudo apt-get update
 $ sudo apt-get upgrade
 ```
 
-**Installed [WiringPi](http://wiringpi.com/): GPIO Interface Library for the Raspberry Pi**
+**Install [WiringPi](http://wiringpi.com/): GPIO Interface Library for the Raspberry Pi**
 ```
 $ sudo apt-get install git-core
 $ git clone git://git.drogon.net/wiringPi
 $ ./build
 ```
+
+**Turn on pin locations on pin 1 and 3** (1 is ON, 0 is OFF)
+```
+$ gpio write 1 1
+$ gpio write 3 1
+```
+Check to see if the pi is ready in the pins correctly
+```
+$ gpio read 1
+$ gpio read 3
+```
+These should output 1 instead of 0, meaning they are on
+
+**Install Web Server**
+Install Apache HTTP server and PHP5 extension
+```
+$ sudo apt-get install apache2 php5 libapache2-mod-php5
+```
+
