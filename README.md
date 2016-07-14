@@ -6,14 +6,16 @@ Installed Raspbian operating system
 Hooked up GND, 5V, G25 and G26 pins to tilt sensor
 
 
-![alt text](https://github.com/jessalbarian/RaspberryPi3/blob/master/setup.jpg?raw=true = "Setup")
+![alt text](https://github.com/jessalbarian/RaspberryPi3/blob/master/setup.jpg?raw=true = "Setup" =250x)
 
 
-Updated Raspbian
+**Updated Raspbian**
 ```
 $ sudo apt-get update
 $ sudo apt-get upgrade
 ```
 
 Installed [WiringPi](http://wiringpi.com/): GPIO Interface Library for the Raspberry Pi
+```
 
+```
