@@ -6,7 +6,7 @@ Installed Raspbian operating system
 Hooked up GND, 5V, G25 and G26 pins to tilt sensor
 
 
-<img src="https://github.com/jessalbarian/RaspberryPi3/blob/master/setup.jpg?raw=true =" width: "100" />
+<img src="https://github.com/jessalbarian/RaspberryPi3/blob/master/setup.jpg?raw=true =" width="100" />
 
 
 **Updated Raspbian**
