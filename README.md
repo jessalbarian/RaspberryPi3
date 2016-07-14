@@ -19,15 +19,18 @@ $ sudo apt-get upgrade
 ```
 $ sudo apt-get install git-core
 $ git clone git://git.drogon.net/wiringPi
-$ ./build
+$ cd wiringPi
+$ sudo ./build
 ```
 
 **Turn on pin locations on pin 1 and 3** (1 is ON, 0 is OFF)
 ```
+$ gpio mode 1 out
+$ gpio mode 3 out
 $ gpio write 1 1
 $ gpio write 3 1
 ```
-Check to see if the pi is ready in the pins correctly
+Check to see if the pi is reading in the pins correctly
 ```
 $ gpio read 1
 $ gpio read 3
@@ -40,3 +43,7 @@ Install Apache HTTP server and PHP5 extension
 $ sudo apt-get install apache2 php5 libapache2-mod-php5
 ```
 
+**Get the IP Address of your Raspberry Pi**
+```
+$ sudo ifconfig
+```
