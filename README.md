@@ -28,12 +28,11 @@ $ sudo ./build
 $ gpio mode 1 out
 $ gpio mode 3 out
 $ gpio write 1 1
-$ gpio write 3 1
 ```
-Check to see if the pi is reading in the pins correctly
+**Check to see if the pi is reading in the pins correctly**
 ```
-$ gpio read 1
-$ gpio read 3
+$ gpio read 2
+$ gpio read 4
 ```
 These should output 1 instead of 0, meaning they are on
 
@@ -47,3 +46,14 @@ $ sudo apt-get install apache2 php5 libapache2-mod-php5
 ```
 $ sudo ifconfig
 ```
+If you type in the IP address into your browser, you should see a start up page from Apache.
+
+
+
+
+
+
+
+
+
+
