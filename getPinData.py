@@ -11,6 +11,7 @@ current_state = 0
 previous_state = 0
 start = 0
 counter = 0
+beerNum = 0
 
 while True:
     current_state = GPIO.input(18)
@@ -38,5 +39,6 @@ while True:
 	print("         |:: '    |")
 	print("          ~~----~")
 	counter = 0
+	beerNum = beerNum + 1
 
 GPIO.cleanup()
