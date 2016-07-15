@@ -29,7 +29,7 @@ $ gpio read 18
 $ gpio read 19
 ```
 18 should output 1, 19 should output to 0
-Note: I have my sensor connected to GPIO pins 18 and 19
+Note: I have my tilt sensor connected to GPIO pins 18 and 19
 
 **Install Web Server**
 Install Apache HTTP server and PHP5 extension
@@ -54,13 +54,15 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.IN)
 GPIO.setup(19, GPIO.IN)
 
-num = 0
+state = 0
 while True:
-    num = GPIO.input(18)
-    if num == 1:
+    state = GPIO.input(18)
+    if state == 1:
         print("Tilt sensor is up")
+	time.sleep(1)
     else:
         print("Tilt sensor is down")
+	time.sleep(1)
 
 GPIO.cleanup()
 ```
