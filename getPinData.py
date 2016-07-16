@@ -20,15 +20,18 @@ total_beers = result['total_beers']
 today = time.strftime("%m/%d/%y")
 first_day = result['beerinfo1']['date']
 
-a = date(int(today[6:8]), int(today[0:2:]), int(today[3:5]))
+a = date(int(today[6:8]), int(today[0:2]), int(today[3:5]))
 b = date(int(first_day[6:8]), int(first_day[0:2]), int(first_day[3:5]))
 days_in_between =(a - b).days
-#i = str(days_in_between + 1)
-i='2'
-if result['beerinfo'+i] is None:
-    print("beerinfo none")
-previous_date = result['beerinfo'+i]['date']
 
+i = str(days_in_between + 1)
+print("a: %s" % a)
+print("b: %s" % b)
+print("i: %s" % i)
+#i='2'
+#if result['beerinfo'+i] is None:
+ #   print("beerinfo none")
+#previous_date = result['beerinfo'+i]['date']
 
 # Set up GPIO
 GPIO.setmode(GPIO.BCM)
@@ -39,15 +42,21 @@ current_state = 0
 previous_state = 0
 counter = 0
 
-#Get daily beer number
-dailyBeerNum = result['beerinfo'+i]['beersPerDay']
 
 sensor1_pin = 18
 if sensor1_pin == 18:
     name = "IPA"
-firebase.post('beers', 'beerinfo'+i, {'name':name})
-firebase.post('beers', 'beerinfo'+i, {'date':today})
-firebase.post('beers', 'beerinfo'+i, {'id':i})
+#firebase.put('beers', ('beerinfo'+i), {'name':name, 'date':today, 'id':i})
+#firebase.post('/beers', 'beerinfo'+i: {'date':today})
+#firebase.post('/beers', 'beerinfo'+i: {'id':i})
+try:
+    dailyBeerNum = result['beerinfo'+i]['beersPerDay']
+    firebase.put('beers', 'beerinfo'+i, {'name':name, 'date':today, 'id':int(i), 'beersPerDay': dailyBeerNum}
+   # dailyBeerNum = result['beerinfo'+i]['beersPerDay']
+)
+except Exception as Error:
+    firebase.put('beers', ('beerinfo'+i), {'name':name, 'date':today, 'id':int(i), 'beersPerDay': 0})
+    dailyBeerNum = 0
 
 while True:
     sensor1_state = GPIO.input(sensor1_pin)
@@ -78,7 +87,7 @@ while True:
 	counter = 0
 	dailyBeerNum = dailyBeerNum + 1
 	total_beers = total_beers + 1
-	firebase.post('beers', 'beerinfo'+i, {'beersPerDay': dailyBeerNum})
-	firebase.post('beers', 'total_beers', total_beers)
+	firebase.put('beers', 'beerinfo'+i, {'beersPerDay': dailyBeerNum, 'name':name, 'date':today, 'id':i})
+	firebase.put('beers', 'total_beers', total_beers)
 
 GPIO.cleanup()
