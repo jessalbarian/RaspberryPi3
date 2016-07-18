@@ -1,55 +1,26 @@
-# RaspberryPi3 Project
-Working with a Raspberry Pi 3 and RPI-1031 Tilt-a-Whirl tilt sensors
+# [Start Bootstrap](http://startbootstrap.com/) - [Bare](http://startbootstrap.com/template-overviews/bare/)
 
+[Bare](http://startbootstrap.com/template-overviews/bare/) is a bare HTML starter template for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/). This template features predefined file paths for Bootstrap and jQuery, so you can quickly create Bootstrap websites.
 
-Installed Raspbian operating system
-Hooked up GND, 5V, G25 and G26 pins to tilt sensor
+## Getting Started
 
+To use this template, choose one of the following options to get started:
+* Download the latest release on Start Bootstrap
+* Fork this repository on GitHub
 
-<img src="https://github.com/jessalbarian/RaspberryPi3/blob/master/setup.jpg?raw=true =" width="350" />
+## Bugs and Issues
 
+Have a bug or an issue with this template? [Open a new issue](https://github.com/IronSummitMedia/startbootstrap-bare/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/bare/).
 
-**Update Raspbian OS**
-```
-$ sudo apt-get update
-$ sudo apt-get upgrade
-```
+## Creator
 
-**Install [WiringPi](http://wiringpi.com/): GPIO Interface Library for the Raspberry Pi**
-```
-$ sudo apt-get install git-core
-$ git clone git://git.drogon.net/wiringPi
-$ cd wiringPi
-$ sudo ./build
-```
+Start Bootstrap was created by and is maintained by **David Miller**, Managing Parter at [Iron Summit Media Strategies](http://www.ironsummitmedia.com/).
 
-**Check to see if the pi is reading in the pins correctly**
-```
-$ gpio read 18
-$ gpio read 19
-```
-18 should output 1, 19 should output to 0
-Note: I have my tilt sensor connected to GPIO pins 18 and 19
+* https://twitter.com/davidmillerskt
+* https://github.com/davidtmiller
 
-**Install Web Server**
-Install Apache HTTP server and PHP5 extension
-```
-$ sudo apt-get install apache2 php5 libapache2-mod-php5
-```
+Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
 
-**Get the IP Address of your Raspberry Pi**
-```
-$ sudo ifconfig
-```
-If you type in the IP address into your browser, you should see a start up page from Apache.
+## Copyright and License
 
-**Write a python script to get the sensor data as 0 or 1 (up or down)**
-See getPinData.py
-
-**Interact with the Firebase REST API using [Ozgur](http://ozgur.github.io/python-firebase/)**
-```
-$ sudo pip install requests
-$ sudo pip install python-firebase
-```
-
-
+Copyright 2013-2015 Iron Summit Media Strategies, LLC. Code released under the [Apache 2.0](https://github.com/IronSummitMedia/startbootstrap-bare/blob/gh-pages/LICENSE) license.
