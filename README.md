@@ -44,33 +44,12 @@ $ sudo ifconfig
 If you type in the IP address into your browser, you should see a start up page from Apache.
 
 **Write a python script to get the sensor data as 0 or 1 (up or down)**
-```python
-#!/usr/bin/env python
+See getPinData.py
 
-import RPi.GPIO as GPIO
-import time
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(18, GPIO.IN)
-GPIO.setup(19, GPIO.IN)
-
-state = 0
-while True:
-    state = GPIO.input(18)
-    if state == 1:
-        print("Tilt sensor is up")
-	time.sleep(1)
-    else:
-        print("Tilt sensor is down")
-	time.sleep(1)
-
-GPIO.cleanup()
+**Interact with the Firebase REST API using [Ozgur](http://ozgur.github.io/python-firebase/)**
 ```
-
-
-
-
-
-
+$ sudo pip install requests
+$ sudo pip install python-firebase
+```
 
 
