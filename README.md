@@ -2,7 +2,7 @@
 Working with a Raspberry Pi 3 and RPI-1031 Tilt-a-Whirl tilt sensors
 Installed Raspbian operating system Hooked up GND, 5V, G25 and G26 pins to tilt sensor
 
-<img src="https://github.com/jessalbarian/RaspberryPi3/blob/master/setup.jpg" alt="Raspberry Pi Setup" style="width: 200;"/>
+<img src="https://github.com/jessalbarian/RaspberryPi3/blob/master/setup.jpg" alt="Raspberry Pi Setup" style="width: 100;"/>
 
 ##Update Raspbian OS
 ```
