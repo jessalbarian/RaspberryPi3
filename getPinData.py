@@ -101,7 +101,7 @@ try:
     dailyIPANum = result['Sensor1']['beerinfo'+i]['beersPerDay']
     for m in range(len(result['Sensor1']['beerinfo'+i]['beertimes'])):
         beertimeArrayS1.append(result['Sensor1']['beerinfo'+i]['beertimes']['beer'+str(m)])
-        k = beertimeArrayS1[len(result['Sensor1']['beerinfo'+i]['beertimes'])]
+        k = beertimeArrayS1[len(result['Sensor1']['beerinfo'+i]['beertimes'])-1]
         print(k)
     firebase.put('beers/Sensor1', 'beerinfo'+i, {'datetime':thedate, 'name': 'India Pale Ale', 'date':today, 'id':int(i), 'beersPerDay': dailyIPANum})
 
@@ -116,7 +116,7 @@ try:
     dailyPorterNum = result['Sensor2']['beerinfo'+j]['beersPerDay']
     for l in range(len(result['Sensor2']['beerinfo'+i]['beertimes'])):
         beertimeArrayS2.append(result['Sensor2']['beerinfo'+i]['beertimes']['beer'+str(l)])
-        n = beertimeArrayS1[len(result['Sensor1']['beerinfo'+i]['beertimes'])]
+        n = beertimeArrayS1[len(result['Sensor1']['beerinfo'+i]['beertimes'])-1]
         print(n)
     firebase.put('beers/Sensor2', 'beerinfo'+j, {'datetime':thedate, 'name': 'Chocolate Porter', 'date':today, 'id': int(j), 'beersPerDay': dailyPorterNum})
 
@@ -162,7 +162,7 @@ while True:
 	dailyIPANum = dailyIPANum + 1
 	total_beers = total_beers + 1
         beertimeS1 = time.strftime("%H:%M:%S")        
-        k = k + 1
+    
     if counterS2 == 3:
 	print("----------------------")
 	print("Sensor2 poured a beer!")
@@ -171,10 +171,11 @@ while True:
 	dailyPorterNum = dailyPorterNum + 1
 	total_beers = total_beers + 1
         beertimeS2 = time.strftime("%H:%M:%S")
-        n = n + 1
+        
         firebase.put('beers/Sensor1', 'beerinfo'+i, {'datetime': thedate, 'beersPerDay': dailyIPANum, 'name':'India Pale Ale', 'date':today, 'id':i, 'beertimes' :{'beer'+str(k):beertimeS1}})
         firebase.put('beers/Sensor2', 'beerinfo'+j, {'datetime': thedate, 'beersPerDay': dailyPorterNum, 'name':'Chocolate Porter', 'date':today, 'id':j, 'beertimes' :{'beer'+str(n):beertimeS2}})
         firebase.put('beers', 'total_beers', total_beers)
-
+	n = n + 1
+	k = k + 1
 
 GPIO.cleanup()
