@@ -12,13 +12,17 @@ from firebase import firebase
 firebase = firebase.FirebaseApplication('https://madesensors.firebaseio.com/', None)
 tap1 = firebase.get('/tap1', None)
 tap2 = firebase.get('/tap2', None)
-
-#------------
-# Set up date
-#------------
-today = time.strftime("%m/%d/%y %H:%M:%S")
-
-
+try:
+    i = firebase.get('/tap1/times', None)
+    i = len(i)
+except Exception as Error:
+    i = 1
+try:
+    j = firebase.get('/tap2/times', None)
+    print(len(j))
+    j = len(j)
+except Exception as Error:
+    j = 1
 
 #------------
 # Set up GPIO
@@ -28,33 +32,24 @@ GPIO.setup(12, GPIO.IN) #Sensor 1
 GPIO.setup(18, GPIO.IN) #Sensor 2
 
 
-
 #----------
 # Variables
 #----------
 current_state = 0
-previous_state = 0
+previous_state = 1
 current_stateS2 = 0
-previous_stateS2 = 0
+previous_stateS2 = 1
 counter = 0
 counterS2 = 0
 sensor1_pin = 12
 sensor2_pin = 18
-i = 1
+start_timeS1 = ""
+start_timeS2 = ""
 
 
-
-#-------------------------------
-# Create new objects to database
-#-------------------------------
-# Tap1 Objects
-# Tap2 Objects
-
-
-
-#----------------
-# Loop for sensor
-#----------------
+#---------------------
+# Loop for sensor data
+#---------------------
 while True:
     sensor1_state = GPIO.input(sensor1_pin)
     sensor2_state = GPIO.input(sensor2_pin)
@@ -67,7 +62,6 @@ while True:
 	print("Sensor2 value is down")
 	if previous_stateS2 == sensor2_state:
 	    counterS2 = counterS2 + 1
-	print(counterS2)
 	if counterS2 == 1:
     	    start_timeS2 = time.strftime("%m/%d/%y %H:%M:%S")
 	    print(start_timeS2)
@@ -95,19 +89,22 @@ while True:
 	print("Sensor1 poured a beer!")
 	print("----------------------")
 	counter = 0
-    
+	try:
+            firebase.put('tap1', 'times/'+str(j), {'start_time': start_timeS1, 'stop_time': stop_timeS1})
+        except Exception as Error:
+            firebase.put('tap1', 'times/'+str(j), {'start_time': "", 'stop_time': ""})
+        j = j + 1    
     if counterS2 == 3:
 	stop_timeS2 = time.strftime("%m/%d/%y %H:%M:%S")
 	print("----------------------")
 	print("Sensor2 poured a beer!")
 	print("----------------------")
 	counterS2 = 0
-    if start_timeS1 or start_timeS2 is not None:
         try:
-            firebase.put('tap2', 'times/'+str(i), {'start_time': start_timeS2, 'stop_time': stop_timeS2})        
+            firebase.put('tap2', 'times/'+str(i), {'start_time': start_timeS2, 'stop_time': stop_timeS2})
         except Exception as Error:
             firebase.put('tap2', 'times/'+str(i), {'start_time': "", 'stop_time': ""})
-    i = i + 1
+        i = i + 1
 """
     try:
         firebase.put('tap1', 'times/'+str(i), {'start_time': start_timeS1, 'stop_time': stop_timeS1})
