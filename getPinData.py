@@ -14,15 +14,15 @@ tap1 = firebase.get('/tap1', None)
 tap2 = firebase.get('/tap2', None)
 try:
     i = firebase.get('/tap1/times', None)
-    i = len(i)
+    i = len(i)-1
 except Exception as Error:
     i = 1
 try:
     j = firebase.get('/tap2/times', None)
-    print(len(j))
-    j = len(j)
+    j = len(j)-1
 except Exception as Error:
     j = 1
+
 
 #------------
 # Set up GPIO
@@ -43,8 +43,6 @@ counter = 0
 counterS2 = 0
 sensor1_pin = 12
 sensor2_pin = 18
-start_timeS1 = ""
-start_timeS2 = ""
 
 
 #---------------------
@@ -53,20 +51,6 @@ start_timeS2 = ""
 while True:
     sensor1_state = GPIO.input(sensor1_pin)
     sensor2_state = GPIO.input(sensor2_pin)
-
-    if sensor2_state == 1:
-	print("Sensor2 value is up")
-	time.sleep(1)
-	previous_stateS2 = sensor2_state
-    else:
-	print("Sensor2 value is down")
-	if previous_stateS2 == sensor2_state:
-	    counterS2 = counterS2 + 1
-	if counterS2 == 1:
-    	    start_timeS2 = time.strftime("%m/%d/%y %H:%M:%S")
-	    print(start_timeS2)
-	previous_stateS2 = sensor2_state
-	time.sleep(1)
 
     if sensor1_state == 1:
         print("Sensor1 value is up")
@@ -82,6 +66,20 @@ while True:
 	previous_state = sensor1_state
 	time.sleep(1)
 
+    if sensor2_state == 1:
+	print("Sensor2 value is up")
+	time.sleep(1)
+	previous_stateS2 = sensor2_state
+    else:
+	print("Sensor2 value is down")
+	if previous_stateS2 == sensor2_state:
+	    counterS2 = counterS2 + 1
+	if counterS2 == 1:
+    	    start_timeS2 = time.strftime("%m/%d/%y %H:%M:%S")
+	    print(start_timeS2)
+	previous_stateS2 = sensor2_state
+	time.sleep(1)
+
     # If 6 seconds has passed, 1 beer has been poured
     if counter == 3:
 	stop_timeS1 = time.strftime("%m/%d/%y %H:%M:%S")
@@ -90,10 +88,10 @@ while True:
 	print("----------------------")
 	counter = 0
 	try:
-            firebase.put('tap1', 'times/'+str(j), {'start_time': start_timeS1, 'stop_time': stop_timeS1})
+            firebase.put('tap1', 'times/'+str(i), {'start_time': start_timeS1, 'stop_time': stop_timeS1})
         except Exception as Error:
-            firebase.put('tap1', 'times/'+str(j), {'start_time': "", 'stop_time': ""})
-        j = j + 1    
+            firebase.put('tap1', 'times/'+str(i), {'start_time': "", 'stop_time': ""})
+        i = i + 1    
     if counterS2 == 3:
 	stop_timeS2 = time.strftime("%m/%d/%y %H:%M:%S")
 	print("----------------------")
@@ -101,10 +99,10 @@ while True:
 	print("----------------------")
 	counterS2 = 0
         try:
-            firebase.put('tap2', 'times/'+str(i), {'start_time': start_timeS2, 'stop_time': stop_timeS2})
+            firebase.put('tap2', 'times/'+str(j), {'start_time': start_timeS2, 'stop_time': stop_timeS2})
         except Exception as Error:
-            firebase.put('tap2', 'times/'+str(i), {'start_time': "", 'stop_time': ""})
-        i = i + 1
+            firebase.put('tap2', 'times/'+str(j), {'start_time': "", 'stop_time': ""})
+        j = j + 1
 """
     try:
         firebase.put('tap1', 'times/'+str(i), {'start_time': start_timeS1, 'stop_time': stop_timeS1})
