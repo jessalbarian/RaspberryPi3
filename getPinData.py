@@ -35,10 +35,10 @@ GPIO.setup(18, GPIO.IN) #Sensor 2
 #----------
 # Variables
 #----------
-current_state = 0
-previous_state = 1
-current_stateS2 = 0
-previous_stateS2 = 1
+current_state = -1
+previous_state = -1
+current_stateS2 = -1
+previous_stateS2 = -1
 counter = 0
 counterS2 = 0
 sensor1_pin = 12
@@ -58,10 +58,10 @@ while True:
 	previous_state = sensor1_state
     else:
         print("Sensor1 value is down")
-	if previous_state == sensor1_state:	
+	if previous_state == sensor1_state or previous_state == -1:	
 	    counter = counter + 1
 	if counter == 1:
-	    start_timeS1 = time.strftime("%m/%d/%y %H:%M:%S")
+	    start_timeS1 = time.strftime("%m/%d/%Y %H:%M:%S")
 	    print(start_timeS1)
 	previous_state = sensor1_state
 	time.sleep(1)
@@ -72,17 +72,17 @@ while True:
 	previous_stateS2 = sensor2_state
     else:
 	print("Sensor2 value is down")
-	if previous_stateS2 == sensor2_state:
+	if previous_stateS2 == sensor2_state or previous_stateS2 == -1:
 	    counterS2 = counterS2 + 1
 	if counterS2 == 1:
-    	    start_timeS2 = time.strftime("%m/%d/%y %H:%M:%S")
+    	    start_timeS2 = time.strftime("%m/%d/%Y %H:%M:%S")
 	    print(start_timeS2)
 	previous_stateS2 = sensor2_state
 	time.sleep(1)
 
     # If 6 seconds has passed, 1 beer has been poured
     if counter == 3:
-	stop_timeS1 = time.strftime("%m/%d/%y %H:%M:%S")
+	stop_timeS1 = time.strftime("%m/%d/%Y %H:%M:%S")
 	print("----------------------")
 	print("Sensor1 poured a beer!")
 	print("----------------------")
@@ -93,7 +93,7 @@ while True:
             firebase.put('tap1', 'times/'+str(i), {'start_time': "", 'stop_time': ""})
         i = i + 1    
     if counterS2 == 3:
-	stop_timeS2 = time.strftime("%m/%d/%y %H:%M:%S")
+	stop_timeS2 = time.strftime("%m/%d/%Y %H:%M:%S")
 	print("----------------------")
 	print("Sensor2 poured a beer!")
 	print("----------------------")
