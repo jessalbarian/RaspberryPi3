@@ -22,7 +22,16 @@ try:
     j = len(j)-1
 except Exception as Error:
     j = 1
-
+try:
+    k = firebase.get('/tap1/alltimes', None)
+    k = len(k)-1
+except Exception as Error:
+    k = 1
+try:
+    l = firebase.get('/tap2/alltimes', None)
+    l = len(l)-1
+except Exception as Error:
+    l = 1
 
 #------------
 # Set up GPIO
@@ -54,8 +63,16 @@ while True:
 
     if sensor1_state == 1:
         print("Sensor1 value is up")
-	time.sleep(1)
+	#if previous_state == 0:
+            #try:
+             #   firebase.put('tap1', 'alltimes/'+str(k), {'start_time': start1, 'stop_time': stop1})
+            #except Exception as Error:
+            #    firebase.put('tap1', 'alltimes/'+str(k), {'start_time': "", 'stop_time': ""})
+            #k = k + 1
+	    #start1 = None
+	    #stop1 = None
 	previous_state = sensor1_state
+	time.sleep(1)
     else:
         print("Sensor1 value is down")
 	if previous_state == sensor1_state or previous_state == -1:	
@@ -63,13 +80,24 @@ while True:
 	if counter == 1:
 	    start_timeS1 = time.strftime("%m/%d/%Y %H:%M:%S")
 	    print(start_timeS1)
+	    #start1 = time.strftime("%m/%d/%Y %H:%M:%S")
 	previous_state = sensor1_state
 	time.sleep(1)
 
     if sensor2_state == 1:
 	print("Sensor2 value is up")
-	time.sleep(1)
+	#if previous_stateS2 == 0:
+            #stop2 = time.strftime("%m/%d/%Y %H:%M:%S")
+	    #print(stop2)
+            #try:
+             #   firebase.put('tap2', 'alltimes/'+str(l), {'start_time': start2, 'stop_time': stop2})
+            #except Exception as Error:
+            #    firebase.put('tap2', 'alltimes/'+str(l), {'start_time': "", 'stop_time': ""})
+            #l = l + 1
+	    #start2 = None
+	    #stop2 = None
 	previous_stateS2 = sensor2_state
+	time.sleep(1)
     else:
 	print("Sensor2 value is down")
 	if previous_stateS2 == sensor2_state or previous_stateS2 == -1:
@@ -77,8 +105,10 @@ while True:
 	if counterS2 == 1:
     	    start_timeS2 = time.strftime("%m/%d/%Y %H:%M:%S")
 	    print(start_timeS2)
+	    #start2 = time.strftime("%m/%d/%Y %H:%M:%S")
 	previous_stateS2 = sensor2_state
 	time.sleep(1)
+    
 
     # If 6 seconds has passed, 1 beer has been poured
     if counter == 3:
