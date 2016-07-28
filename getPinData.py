@@ -38,7 +38,7 @@ except Exception as Error:
 #------------
 GPIO.setmode(GPIO.BOARD) #BOARD instead of BCM
 GPIO.setup(12, GPIO.IN) #Sensor 1
-GPIO.setup(18, GPIO.IN) #Sensor 2
+#GPIO.setup(18, GPIO.IN) #Sensor 2
 
 
 #----------
@@ -59,7 +59,7 @@ sensor2_pin = 18
 #---------------------
 while True:
     sensor1_state = GPIO.input(sensor1_pin)
-    sensor2_state = GPIO.input(sensor2_pin)
+ #   sensor2_state = GPIO.input(sensor2_pin)
 
     if sensor1_state == 1:
         print("Sensor1 value is up")
@@ -84,8 +84,8 @@ while True:
 	previous_state = sensor1_state
 	time.sleep(1)
 
-    if sensor2_state == 1:
-	print("Sensor2 value is up")
+  #  if sensor2_state == 1:
+#	print("Sensor2 value is up")
 	#if previous_stateS2 == 0:
             #stop2 = time.strftime("%m/%d/%Y %H:%M:%S")
 	    #print(stop2)
@@ -96,22 +96,22 @@ while True:
             #l = l + 1
 	    #start2 = None
 	    #stop2 = None
-	previous_stateS2 = sensor2_state
-	time.sleep(1)
-    else:
-	print("Sensor2 value is down")
-	if previous_stateS2 == sensor2_state or previous_stateS2 == -1:
-	    counterS2 = counterS2 + 1
-	if counterS2 == 1:
-    	    start_timeS2 = time.strftime("%m/%d/%Y %H:%M:%S")
-	    print(start_timeS2)
+#	previous_stateS2 = sensor2_state
+#	time.sleep(1)
+ #   else:
+#	print("Sensor2 value is down")
+#	if previous_stateS2 == sensor2_state or previous_stateS2 == -1:
+#	    counterS2 = counterS2 + 1
+#	if counterS2 == 1:
+ #   	    start_timeS2 = time.strftime("%m/%d/%Y %H:%M:%S")
+#	    print(start_timeS2)
 	    #start2 = time.strftime("%m/%d/%Y %H:%M:%S")
-	previous_stateS2 = sensor2_state
-	time.sleep(1)
+#	previous_stateS2 = sensor2_state
+#	time.sleep(1)
     
 
     # If 6 seconds has passed, 1 beer has been poured
-    if counter == 3:
+    if counter == 6:
 	stop_timeS1 = time.strftime("%m/%d/%Y %H:%M:%S")
 	print("----------------------")
 	print("Sensor1 poured a beer!")
@@ -122,34 +122,17 @@ while True:
         except Exception as Error:
             firebase.put('tap1', 'times/'+str(i), {'start_time': "", 'stop_time': ""})
         i = i + 1    
-    if counterS2 == 3:
-	stop_timeS2 = time.strftime("%m/%d/%Y %H:%M:%S")
-	print("----------------------")
-	print("Sensor2 poured a beer!")
-	print("----------------------")
-	counterS2 = 0
-        try:
-            firebase.put('tap2', 'times/'+str(j), {'start_time': start_timeS2, 'stop_time': stop_timeS2})
-        except Exception as Error:
-            firebase.put('tap2', 'times/'+str(j), {'start_time': "", 'stop_time': ""})
-        j = j + 1
-"""
-    try:
-        firebase.put('tap1', 'times/'+str(i), {'start_time': start_timeS1, 'stop_time': stop_timeS1})
-        firebase.put('tap2', 'times/'+str(i), {'start_time': start_timeS2, 'stop_time': stop_timeS2})
-	print("try")
-    except Exception as Error:
-	firebase.put('tap1', 'times/'+str(i), {'start_time': "", 'stop_time': ""})
-        firebase.put('tap2', 'times/'+str(i), {'start_time': "", 'stop_time': ""})	
-	print("catch")
-"""
+#    if counterS2 == 3:
+#	stop_timeS2 = time.strftime("%m/%d/%Y %H:%M:%S")
+#	print("----------------------")
+#	print("Sensor2 poured a beer!")
+#	print("----------------------")
+#	counterS2 = 0
+ #       try:
+  #          firebase.put('tap2', 'times/'+str(j), {'start_time': start_timeS2, 'stop_time': stop_timeS2})
+#        except Exception as Error:
+ #           firebase.put('tap2', 'times/'+str(j), {'start_time': "", 'stop_time': ""})
+  #      j = j + 1
 
-#	firebase.put('beers/Sensor2', 'beerinfo'+j, {'datetime': thedate, 'beersPerDay': dailyPorterNum, 'name':'Chocolate Porter', 'date':today, 'id':j, 'beertimes' : beerTimesS2})
-	
-#        firebase.put('beers/Sensor1', 'beerinfo'+i, {'datetime': thedate, 'beersPerDay': dailyPorterNum, 'name':'Chocolate Porter', 'date':today, 'id':i, 'beertimes' : beerTimesS1})
-
-
-        #firebase.put('beers/Sensor2', 'beerinfo'+j, {'datetime': thedate, 'beersPerDay': dailyPorterNum, 'name':'Chocolate Porter', 'date':today, 'id':j, 'beertimes' :{'beer'+str(n):beertimeS2}})
- #       firebase.put('beers', 'total_beers', total_beers)
 
 GPIO.cleanup()
