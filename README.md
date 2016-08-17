@@ -36,3 +36,9 @@ Write a python script to get the sensor data as 0 or 1 (up or down) See getPinDa
 $ sudo pip install requests
 $ sudo pip install python-firebase
 ```
+
+![screen shot]()
+
+![screen shot]()
+
+![screen shot]()
