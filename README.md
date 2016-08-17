@@ -37,8 +37,8 @@ $ sudo pip install requests
 $ sudo pip install python-firebase
 ```
 
-<img src="pic1.jpg" alt="Setup" style="width: 200px;"/>
+<img src="pic1.jpg" alt="Setup" style="width: 100px;" />
 
-<img src="pic2.jpg" alt="Setup" style="width: 200px;"/>
+<img src="pic2.jpg" alt="Setup" style="width: 100px;"/>
 
-<img src="pic3.jpg" alt="Setup" style="width: 200px;"/>
+<img src="pic3.jpg" alt="Setup" style="width: 100px;"/>
