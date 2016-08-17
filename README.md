@@ -37,8 +37,8 @@ $ sudo pip install requests
 $ sudo pip install python-firebase
 ```
 
-![screen shot](https://github.com/jessalbarian/RaspberryPi3/blob/master/pic1.jpg) { width: 200px; }
+<img src="pic1.jpg" alt="Setup" style="width: 200px;"/>
 
-![screen shot](https://github.com/jessalbarian/RaspberryPi3/blob/master/pic2.jpg) { width: 200px; }
+<img src="pic2.jpg" alt="Setup" style="width: 200px;"/>
 
-![screen shot](https://github.com/jessalbarian/RaspberryPi3/blob/master/pic3.jpg) { width: 200px; }
+<img src="pic3.jpg" alt="Setup" style="width: 200px;"/>
