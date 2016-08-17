@@ -9,6 +9,7 @@ from firebase import firebase
 #----------------
 # Set up Firebase
 #----------------
+<<<<<<< HEAD
 firebase = firebase.FirebaseApplication('https://madesensors.firebaseio.com/', None)
 tap1 = firebase.get('/tap1', None)
 tap2 = firebase.get('/tap2', None)
@@ -32,13 +33,57 @@ try:
     l = len(l)-1
 except Exception as Error:
     l = 1
+=======
+firebase = firebase.FirebaseApplication('https://tiltsensorarduino.firebaseio.com', None)
+
+
+
+#--------------------------
+# Get number of total beers
+#--------------------------
+result = firebase.get('/beers', None)
+total_beers = result['total_beers']
+
+
+
+#------------
+# Set up date
+#------------
+today = time.strftime("%m/%d/%y")
+
+# Get date formatted a specific way
+thedate = datetime.date.today()
+
+# Getting first database entry for date
+first_day = result['Sensor1']['beerinfo1']['date']
+first_dayS2 = result['Sensor2']['beerinfo1']['date']
+
+# Calculate days in between to get value i
+a = date(int(today[6:8]), int(today[0:2]), int(today[3:5]))
+
+b1 = date(int(first_day[6:8]), int(first_day[0:2]), int(first_day[3:5]))
+b2 = date(int(first_dayS2[6:8]), int(first_dayS2[0:2]), int(first_dayS2[3:5]))
+days_in_betweenS1 =(a - b1).days
+days_in_betweenS2 =(a - b2).days
+i = str(days_in_betweenS1)
+j = str(days_in_betweenS2)
+
+>>>>>>> parent of 42d1194... added beer time
+
 
 #------------
 # Set up GPIO
 #------------
+<<<<<<< HEAD
 GPIO.setmode(GPIO.BOARD) #BOARD instead of BCM
 GPIO.setup(12, GPIO.IN) #Sensor 1
 #GPIO.setup(18, GPIO.IN) #Sensor 2
+=======
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(18, GPIO.IN) #Sensor 1
+GPIO.setup(22, GPIO.IN) #Sensor 2
+
+>>>>>>> parent of 42d1194... added beer time
 
 
 #----------
@@ -50,13 +95,36 @@ current_stateS2 = -1
 previous_stateS2 = -1
 counter = 0
 counterS2 = 0
-sensor1_pin = 12
-sensor2_pin = 18
+sensor1_pin = 18
+sensor2_pin = 22
 
 
+<<<<<<< HEAD
 #---------------------
 # Loop for sensor data
 #---------------------
+=======
+#-------------------------------
+# Create new objects to database
+#-------------------------------
+try:
+    dailyIPANum = result['Sensor1']['beerinfo'+i]['beersPerDay']
+    dailyPorterNum = result['Sensor2']['beerinfo'+j]['beersPerDay']
+    firebase.put('beers/Sensor1', 'beerinfo'+i, {'datetime':thedate, 'name': 'India Pale Ale', 'date':today, 'id':int(i), 'beersPerDay': dailyIPANum})
+    firebase.put('beers/Sensor2', 'beerinfo'+j, {'datetime':thedate, 'name': 'Chocolate Porter', 'date':today, 'id': int(j), 'beersPerDay': dailyPorterNum})
+
+except Exception as Error:
+    firebase.put('beers/Sensor1', ('beerinfo'+i), {'datetime':thedate, 'name':'India Pale Ale', 'date':today, 'id':int(i), 'beersPerDay': 0})
+    firebase.put('beers/Sensor2', ('beerinfo'+j), {'datetime':thedate, 'name':'Chocolate Porter', 'date':today, 'id':int(j), 'beersPerDay': 0})
+    dailyIPANum = 0
+    dailyPorterNum = 0
+
+try:
+
+#----------------
+# Loop for sensor
+#----------------
+>>>>>>> parent of 42d1194... added beer time
 while True:
     sensor1_state = GPIO.input(sensor1_pin)
  #   sensor2_state = GPIO.input(sensor2_pin)
@@ -117,6 +185,7 @@ while True:
 	print("Sensor1 poured a beer!")
 	print("----------------------")
 	counter = 0
+<<<<<<< HEAD
 	try:
             firebase.put('tap1', 'times/'+str(i), {'start_time': start_timeS1, 'stop_time': stop_timeS1})
         except Exception as Error:
@@ -133,6 +202,22 @@ while True:
 #        except Exception as Error:
  #           firebase.put('tap2', 'times/'+str(j), {'start_time': "", 'stop_time': ""})
   #      j = j + 1
+=======
+
+    if counterS2 == 3:
+	print("----------------------")
+	print("Sensor2 poured a beer!")
+	print("----------------------")
+	counterS2 = 0
+	
+	dailyIPANum = dailyIPANum + 1
+	dailyPorterNum = dailyPorterNum + 1
+	total_beers = total_beers + 1
+
+	firebase.put('beers/Sensor1', 'beerinfo'+i, {'datetime': thedate, 'beersPerDay': dailyIPANum, 'name':'India Pale Ale', 'date':today, 'id':i})
+	firebase.put('beers/Sensor2', 'beerinfo'+j, {'datetime': thedate, 'beersPerDay': dailyPorterNum, 'name':'Chocolate Porter', 'date':today, 'id':j})
+	firebase.put('beers', 'total_beers', total_beers)
+>>>>>>> parent of 42d1194... added beer time
 
 
 GPIO.cleanup()
