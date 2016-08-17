@@ -71,14 +71,18 @@ j = str(days_in_betweenS2)
 >>>>>>> parent of 42d1194... added beer time
 
 
+
 #------------
 # Set up GPIO
 #------------
+<<<<<<< HEAD
 <<<<<<< HEAD
 GPIO.setmode(GPIO.BOARD) #BOARD instead of BCM
 GPIO.setup(12, GPIO.IN) #Sensor 1
 #GPIO.setup(18, GPIO.IN) #Sensor 2
 =======
+=======
+>>>>>>> parent of 42d1194... added beer time
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.IN) #Sensor 1
 GPIO.setup(22, GPIO.IN) #Sensor 2
@@ -186,6 +190,7 @@ while True:
 	print("----------------------")
 	counter = 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	try:
             firebase.put('tap1', 'times/'+str(i), {'start_time': start_timeS1, 'stop_time': stop_timeS1})
         except Exception as Error:
@@ -203,6 +208,8 @@ while True:
  #           firebase.put('tap2', 'times/'+str(j), {'start_time': "", 'stop_time': ""})
   #      j = j + 1
 =======
+=======
+>>>>>>> parent of 42d1194... added beer time
 
     if counterS2 == 3:
 	print("----------------------")
