@@ -111,7 +111,7 @@ while True:
     
 
     # If 6 seconds has passed, 1 beer has been poured
-    if counter == 4:
+    if counter == 6:
 	stop_timeS1 = time.strftime("%m/%d/%Y %H:%M:%S")
 	print("----------------------")
 	print("Sensor1 poured a beer!")
@@ -122,7 +122,7 @@ while True:
         except Exception as Error:
             firebase.put('tap1', 'times/'+str(i), {'start_time': "", 'stop_time': ""})
         i = i + 1    
-#    if counterS2 == 4:
+#    if counterS2 == 3:
 #	stop_timeS2 = time.strftime("%m/%d/%Y %H:%M:%S")
 #	print("----------------------")
 #	print("Sensor2 poured a beer!")
