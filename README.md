@@ -38,7 +38,7 @@ $ sudo pip install python-firebase
 ```
 
 <img src="pic1.jpg" alt="Setup" style="width: 100px;" />
-
+![setup](pic1.jpg){:height="36px" width="36px"}
 <img src="pic2.jpg" alt="Setup" style="width: 100px;"/>
 
 <img src="pic3.jpg" alt="Setup" style="width: 100px;"/>
